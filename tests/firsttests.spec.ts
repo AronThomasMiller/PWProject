@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Test 1: Verify login with valid credentials', async ({ page }) => {
-    await page.goto(process.env.WEB_URL + '/auth/login');
+    await page.goto('/auth/login');
     await page.fill('#email', process.env.USER_EMAIL ?? '');
     await page.fill('#password', process.env.USER_PASSWORD ?? '');
     await page.getByTestId('login-submit').click();
@@ -12,7 +12,7 @@ test('Test 1: Verify login with valid credentials', async ({ page }) => {
 })
 
 test('Test 2: Verify user can view product details', async ({ page }) => {
-    await page.goto(process.env.WEB_URL + '');
+    await page.goto('');
     await page.locator("[class='card']").nth(0).click()
 
     await expect(page).toHaveURL(/\/product\//);
@@ -23,7 +23,7 @@ test('Test 2: Verify user can view product details', async ({ page }) => {
 })
 
 test('Test 3: Verify user can add product to cart', async ({ page }) => {
-    await page.goto(process.env.WEB_URL + '');
+    await page.goto('');
     await page.locator("[class='card']").nth(4).click() 
 
     await expect(page).toHaveURL(/\/product\//);
