@@ -1,0 +1,19 @@
+import { test } from "@playwright/test";
+import { HomePage } from "../pages/homePage";
+import { config } from "../env.config";
+import { ProductPage } from "../pages/productPage";
+
+test("Test 2: Verify user can view product details", async ({ page }) => {
+  const homePage = new HomePage(page);
+
+  await homePage.navigate();
+  await homePage.clickOnProductCard(0);
+
+  const productPage = new ProductPage(page);
+
+  await productPage.expectUrlToContainProductId(config.weburl);
+  await productPage.expectProductNameToContainText("Combination Pliers");
+  await productPage.expectUnitPriceToContainText("14.15");
+  await productPage.expectAddToCartToBeVisible();
+  await productPage.expectAddToFavoritesButtonToBeVisible();
+});
