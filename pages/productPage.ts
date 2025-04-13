@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { HeaderF } from "./headerFragments";
+import { HeaderFragment } from "./headerFragments";
 
 export class ProductPage {
   page: Page;
@@ -11,7 +11,7 @@ export class ProductPage {
   cartQuantity: Locator;
   productTitle: Locator;
   proceed: Locator;
-  header: HeaderF;
+  header: HeaderFragment;
 
   constructor(page: Page) {
     this.page = page;
@@ -25,7 +25,7 @@ export class ProductPage {
     this.cartQuantity = this.page.getByTestId("cart-quantity");
     this.productTitle = this.page.getByTestId("product-title");
     this.proceed = this.page.getByTestId("proceed-1");
-    this.header = new HeaderF(page);
+    this.header = new HeaderFragment(page);
   }
 
   async clickOnAddToCartButton(): Promise<void> {
