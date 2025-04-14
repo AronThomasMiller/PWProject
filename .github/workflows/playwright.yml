@@ -7,6 +7,8 @@ on:
 jobs:
   test:
     timeout-minutes: 60
+    env:
+      WEB_URL: ${{ secrets.WEB_URL }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -25,3 +27,6 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+        
+
+
