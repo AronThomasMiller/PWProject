@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { HeaderFragment } from "./headerFragments";
+import { AlertFragment } from "./alertFragment";
 
 export class ProductPage {
   page: Page;
@@ -7,11 +8,11 @@ export class ProductPage {
   productName: Locator;
   unitPrice: Locator;
   addToFavoritesButton: Locator;
-  alert: Locator;
   cartQuantity: Locator;
   productTitle: Locator;
   proceed: Locator;
   header: HeaderFragment;
+  alertFragment: AlertFragment;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,13 +20,11 @@ export class ProductPage {
     this.productName = this.page.getByTestId("product-name");
     this.unitPrice = this.page.getByTestId("unit-price");
     this.addToFavoritesButton = this.page.getByTestId("add-to-favorites");
-    this.alert = this.page.getByRole("alert", {
-      name: "Product added to shopping cart",
-    });
     this.cartQuantity = this.page.getByTestId("cart-quantity");
     this.productTitle = this.page.getByTestId("product-title");
     this.proceed = this.page.getByTestId("proceed-1");
     this.header = new HeaderFragment(page);
+    this.alertFragment = new AlertFragment(page);
   }
 
   async clickOnAddToCartButton(): Promise<void> {
@@ -52,36 +51,24 @@ export class ProductPage {
     await expect(this.page).toHaveURL(new RegExp(`^${url}/product/[A-Z0-9]+$`));
   }
 
-  async expectPageToContainCorrectProductName(): Promise<void> {
-    await expect(this.productName).toContainText("Slip Joint Pliers");
+  async expectPageToContainCorrectProductName(name): Promise<void> {
+    await expect(this.productName).toContainText(name);
   }
 
-  async expectPageToContainCorrectUnitPrice(): Promise<void> {
-    await expect(this.unitPrice).toContainText("9.17");
-  }
-
-  async expectAllertToContainText(): Promise<void> {
-    await expect(this.alert).toContainText("Product added to shopping cart");
-  }
-
-  async expectAlertDisapperAfer8Sec(): Promise<void> {
-    await expect(this.alert).not.toBeVisible({ timeout: 8000 });
-  }
-
-  async expectAlertIsHidden(): Promise<void> {
-    await expect(this.alert).toBeHidden();
+  async expectPageToContainCorrectUnitPrice(price): Promise<void> {
+    await expect(this.unitPrice).toContainText(price);
   }
 
   async expectUrlToContainCheckout(url): Promise<void> {
     await expect(this.page).toHaveURL(`${url}/checkout`);
   }
 
-  async expectCartQuantityToContainValue(): Promise<void> {
-    await expect(this.cartQuantity).toContainText("1");
+  async expectCartQuantityToContainValue(quantity): Promise<void> {
+    await expect(this.cartQuantity).toContainText(quantity);
   }
 
-  async expectProductTitleToContainText(): Promise<void> {
-    await expect(this.productTitle).toContainText("Slip Joint Pliers");
+  async expectProductTitleToContainText(name): Promise<void> {
+    await expect(this.productTitle).toContainText(name);
   }
 
   async expectProceedToBeVisible(): Promise<void> {

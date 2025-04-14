@@ -14,15 +14,13 @@ export class HomePage {
   }
 
   async navigate(): Promise<void> {
-    await this.page.goto(`${config.weburl}`);
-    await this.page.waitForTimeout(500);
+    await this.page.goto("/");
   }
 
   async clickOnProductCard(number: number): Promise<void> {
     const card = this.card.nth(number);
     while (!(await this.page.url()).includes("product")) {
       await card.click();
-      await this.page.waitForTimeout(500);
     }
   }
 }

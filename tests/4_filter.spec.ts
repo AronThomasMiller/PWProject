@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
 import { HomePage } from "../pages/homePage";
-import { PowerTools } from "../pages/enums";
+import { PowerTools } from "../utils/enums";
 
 [{ isAsc: true }, { isAsc: false }].forEach(({ isAsc }) => {
   test(`Test 1 & 2  : Verify user can perform sorting by name (${

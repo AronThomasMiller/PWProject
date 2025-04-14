@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { PowerTools } from "./enums";
+import { PowerTools } from "../utils/enums";
 
 export class ProductsFilterFragment {
   page: Page;
@@ -16,12 +16,10 @@ export class ProductsFilterFragment {
 
   async sortByName(isAsc: Boolean): Promise<void> {
     await this.sortDropDown.selectOption(`name,${isAsc ? "asc" : "desc"}`);
-    await this.page.waitForTimeout(500);
   }
 
   async sortByPrice(isAsc: Boolean): Promise<void> {
     await this.sortDropDown.selectOption(`price,${isAsc ? "asc" : "desc"}`);
-    await this.page.waitForTimeout(500);
   }
 
   async getAllProductNames(): Promise<string[]> {

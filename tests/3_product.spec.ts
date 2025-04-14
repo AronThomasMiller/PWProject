@@ -11,19 +11,19 @@ test("Test 3: Verify user can add product to cart", async ({ page }) => {
   await homePage.clickOnProductCard(4);
 
   await productPage.expectUrlToContainProductId(config.weburl);
-  await productPage.expectPageToContainCorrectProductName();
-  await productPage.expectPageToContainCorrectUnitPrice();
+  await productPage.expectPageToContainCorrectProductName("Slip Joint Pliers");
+  await productPage.expectPageToContainCorrectUnitPrice("9.17");
 
   await productPage.clickOnAddToCartButton();
 
-  await productPage.expectAllertToContainText();
-  await productPage.expectAlertDisapperAfer8Sec();
-  await productPage.expectAlertIsHidden();
+  await productPage.alertFragment.expectAlertToContainText();
+  await productPage.alertFragment.expectAlertDisappearAfter8Sec();
+  await productPage.alertFragment.expectAlertIsHidden();
 
   await productPage.header.goToCart();
   await productPage.expectUrlToContainCheckout(config.weburl);
 
-  await productPage.expectCartQuantityToContainValue();
-  await productPage.expectProductTitleToContainText();
+  await productPage.expectCartQuantityToContainValue("1");
+  await productPage.expectProductTitleToContainText("Slip Joint Pliers");
   await productPage.expectProceedToBeVisible();
 });
