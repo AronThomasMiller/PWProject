@@ -51,13 +51,12 @@ export class ProductsFilterFragment {
     expect(prices).toEqual(sorted);
   }
 
-  async checkSander(): Promise<void> {
-    await this.sanderCheckbox.check();
-    await this.page.waitForTimeout(500);
-  }
-
   async expectAllProductContainText(text: string): Promise<void> {
     const productNames = await this.getAllProductNames();
     productNames.forEach((name) => expect(name).toContain(text));
+  }
+
+  getCheckbox(label: PowerTools) {
+    return this.page.getByLabel(PowerTools.SANDER, { exact: false });
   }
 }

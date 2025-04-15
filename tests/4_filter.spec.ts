@@ -32,7 +32,7 @@ test("Test 5: Verify user can filter products by category", async ({
   const homePage = new HomePage(page);
 
   await homePage.navigate();
-  await homePage.productsFilterFragment.checkSander();
+  await homePage.productsFilterFragment.getCheckbox(PowerTools.SANDER);
   await homePage.productsFilterFragment.expectAllProductContainText(
     PowerTools.SANDER
   );

@@ -1,7 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
 import { config } from "./env.config";
-//import { config } from "dotenv";
-//import dotenv from 'dotenv';
 
 /**
  * Read environment variables from file.
@@ -14,7 +12,6 @@ import { config } from "./env.config";
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-//dotenv.config();
 
 export default defineConfig({
   testDir: "./tests",
