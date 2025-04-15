@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 import { HomePage } from "../pages/homePage";
-import { config } from "../env.config";
 import { ProductPage } from "../pages/productPage";
 
 test("Test 2: Verify user can view product details", async ({ page }) => {
@@ -11,7 +10,7 @@ test("Test 2: Verify user can view product details", async ({ page }) => {
 
   const productPage = new ProductPage(page);
 
-  expect(page.url()).toContain('/product');
+  await expect(page.url()).toContain("/product");
   await productPage.expectProductNameToContainText("Combination Pliers");
   await productPage.expectUnitPriceToContainText("14.15");
   await productPage.expectAddToCartToBeVisible();
