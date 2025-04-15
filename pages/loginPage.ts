@@ -34,7 +34,4 @@ export class LoginPage {
     await expect(this.navMenu).toContainText(text);
   }
 
-  async expectUrlToContainAccount(url): Promise<void> {
-    await expect(this.page).toHaveURL(`${url}/account`);
-  }
 }

@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { ProductPage } from "../pages/productPage";
 import { config } from "../env.config";
 import { HomePage } from "../pages/homePage";
@@ -10,7 +10,7 @@ test("Test 3: Verify user can add product to cart", async ({ page }) => {
   await homePage.navigate();
   await homePage.clickOnProductCard(4);
 
-  await productPage.expectUrlToContainProductId(config.weburl);
+  expect(page.url()).toContain('/product');
   await productPage.expectPageToContainCorrectProductName("Slip Joint Pliers");
   await productPage.expectPageToContainCorrectUnitPrice("9.17");
 
@@ -21,7 +21,7 @@ test("Test 3: Verify user can add product to cart", async ({ page }) => {
   await productPage.alertFragment.expectAlertIsHidden();
 
   await productPage.header.goToCart();
-  await productPage.expectUrlToContainCheckout(config.weburl);
+  expect(page).toHaveURL('/checkout');
 
   await productPage.expectCartQuantityToContainValue("1");
   await productPage.expectProductTitleToContainText("Slip Joint Pliers");

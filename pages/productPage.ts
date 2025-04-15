@@ -47,20 +47,12 @@ export class ProductPage {
     await expect(this.addToFavoritesButton).toBeVisible();
   }
 
-  async expectUrlToContainProductId(url): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`^${url}/product/[^/]+`));
-  }
-
   async expectPageToContainCorrectProductName(name): Promise<void> {
     await expect(this.productName).toContainText(name);
   }
 
   async expectPageToContainCorrectUnitPrice(price): Promise<void> {
     await expect(this.unitPrice).toContainText(price);
-  }
-
-  async expectUrlToContainCheckout(url): Promise<void> {
-    await expect(this.page).toHaveURL(`${url}/checkout`);
   }
 
   async expectCartQuantityToContainValue(quantity): Promise<void> {
