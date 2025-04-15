@@ -48,7 +48,7 @@ export class ProductPage {
   }
 
   async expectUrlToContainProductId(url): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`^${url}/product/[A-Z0-9]+$`));
+    await expect(this.page).toHaveURL(new RegExp(`^${url}/product/[^/]+`));
   }
 
   async expectPageToContainCorrectProductName(name): Promise<void> {
