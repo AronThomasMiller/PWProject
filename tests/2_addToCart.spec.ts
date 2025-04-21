@@ -10,7 +10,7 @@ test("Test 2: Verify user can view product details", async ({ page }) => {
 
   const productPage = new ProductPage(page);
 
-  await expect(page.url()).toContain("/product");
+  expect(page.url()).toContain("/product");
   await productPage.expectProductNameToContainText("Combination Pliers");
   await productPage.expectUnitPriceToContainText("14.15");
   await productPage.expectAddToCartToBeVisible();

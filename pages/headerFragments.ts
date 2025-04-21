@@ -1,9 +1,9 @@
-import { Locator } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class HeaderFragment {
   navCart: Locator;
 
-  constructor(readonly page) {
+  constructor(readonly page: Page) {
     this.navCart = this.page.locator('[data-test="nav-cart"]');
   }
 

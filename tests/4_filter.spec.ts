@@ -22,6 +22,7 @@ import { PowerTools } from "../utils/enums";
 
     await homePage.navigate();
     await homePage.productsFilterFragment.sortByPrice(isAsc);
+    await page.waitForLoadState("networkidle");
     await homePage.productsFilterFragment.expectProductPricesAreSorted(isAsc);
   });
 });
@@ -32,7 +33,11 @@ test("Test 5: Verify user can filter products by category", async ({
   const homePage = new HomePage(page);
 
   await homePage.navigate();
-  await homePage.productsFilterFragment.getCheckbox(PowerTools.SANDER);
+  const checkbox = homePage.productsFilterFragment.getCheckbox(
+    PowerTools.SANDER
+  );
+  await checkbox.check();
+  await page.waitForLoadState("networkidle");
   await homePage.productsFilterFragment.expectAllProductContainText(
     PowerTools.SANDER
   );

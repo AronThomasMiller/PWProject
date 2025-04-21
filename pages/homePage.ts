@@ -1,5 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
-import { config } from "../env.config";
+import { Locator, Page } from "@playwright/test";
 import { ProductsFilterFragment } from "./productsFiltersFragment";
 
 export class HomePage {
@@ -19,7 +18,7 @@ export class HomePage {
 
   async clickOnProductCard(number: number): Promise<void> {
     const card = this.card.nth(number);
-    while (!(await this.page.url()).includes("product")) {
+    while (!( this.page.url()).includes("product")) {
       await card.click();
     }
   }

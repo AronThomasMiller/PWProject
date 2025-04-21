@@ -9,7 +9,7 @@ test("Test 3: Verify user can add product to cart", async ({ page }) => {
   await homePage.navigate();
   await homePage.clickOnProductCard(4);
 
-  await expect(page.url()).toContain("/product");
+  expect(page.url()).toContain("/product");
   await productPage.expectPageToContainCorrectProductName("Slip Joint Pliers");
   await productPage.expectPageToContainCorrectUnitPrice("9.17");
 
