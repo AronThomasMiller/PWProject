@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { ProductPage } from "../pages/productPage";
 import { HomePage } from "../pages/homePage";
 
-test("Test 3: Verify user can add product to cart", async ({ page }) => {
+test("Verify user can add product to cart", async ({ page }) => {
   const productPage = new ProductPage(page);
   const homePage = new HomePage(page);
 

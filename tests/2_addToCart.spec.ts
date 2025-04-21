@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { HomePage } from "../pages/homePage";
 import { ProductPage } from "../pages/productPage";
 
-test("Test 2: Verify user can view product details", async ({ page }) => {
+test("Verify user can view product details", async ({ page }) => {
   const homePage = new HomePage(page);
 
   await homePage.navigate();
