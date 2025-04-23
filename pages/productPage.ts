@@ -31,11 +31,11 @@ export class ProductPage {
     await this.addToCartButton.click();
   }
 
-  async expectProductNameToContainText(text): Promise<void> {
+  async expectProductNameToContainText(text: string): Promise<void> {
     await expect(this.productName).toContainText(text);
   }
 
-  async expectUnitPriceToContainText(text): Promise<void> {
+  async expectUnitPriceToContainText(text: string): Promise<void> {
     await expect(this.unitPrice).toContainText(text);
   }
 
@@ -47,19 +47,19 @@ export class ProductPage {
     await expect(this.addToFavoritesButton).toBeVisible();
   }
 
-  async expectPageToContainCorrectProductName(name): Promise<void> {
+  async expectPageToContainCorrectProductName(name: string): Promise<void> {
     await expect(this.productName).toContainText(name);
   }
 
-  async expectPageToContainCorrectUnitPrice(price): Promise<void> {
+  async expectPageToContainCorrectUnitPrice(price: string): Promise<void> {
     await expect(this.unitPrice).toContainText(price);
   }
 
-  async expectCartQuantityToContainValue(quantity): Promise<void> {
+  async expectCartQuantityToContainValue(quantity: string): Promise<void> {
     await expect(this.cartQuantity).toContainText(quantity);
   }
 
-  async expectProductTitleToContainText(name): Promise<void> {
+  async expectProductTitleToContainText(name: string): Promise<void> {
     await expect(this.productTitle).toContainText(name);
   }
 

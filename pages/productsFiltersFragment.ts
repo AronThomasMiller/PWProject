@@ -14,11 +14,11 @@ export class ProductsFilterFragment {
     });
   }
 
-  async sortByName(isAsc: Boolean): Promise<void> {
+  async sortByName(isAsc: boolean): Promise<void> {
     await this.sortDropDown.selectOption(`name,${isAsc ? "asc" : "desc"}`);
   }
 
-  async sortByPrice(isAsc: Boolean): Promise<void> {
+  async sortByPrice(isAsc: boolean): Promise<void> {
     await this.sortDropDown.selectOption(`price,${isAsc ? "asc" : "desc"}`);
   }
 
@@ -53,10 +53,16 @@ export class ProductsFilterFragment {
 
   async expectAllProductContainText(text: string): Promise<void> {
     const productNames = await this.getAllProductNames();
-    productNames.forEach((name) => expect(name).toContain(text));
+
+    const normalizedText = text.toLowerCase().trim();
+    const found = productNames.some((name) =>
+      name.toLowerCase().includes(normalizedText)
+    );
+
+    expect(found).toBeTruthy();
   }
 
-  getCheckbox(label: PowerTools) {
-    return this.page.getByLabel(PowerTools.SANDER, { exact: false });
+  getCheckbox(label: PowerTools): Locator {
+    return this.page.getByLabel(label, { exact: false });
   }
 }

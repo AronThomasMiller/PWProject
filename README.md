@@ -4,12 +4,14 @@
 
 The test suite includes 3 automated tests.</h2>
 
-<b>Framework:</b> Playwright Language: TypeScript
+<b>Framework:</b> Playwright
+
+<b>Language:</b> TypeScript
 
 <b>Requirements:</b> You should have any git client installed NodeJS 21 or higher VSCode
 
 <b>Install dependencies:</b> npm install , npm i dotenv
 
-<b>Run all tests:</b> npx playwright test 
+<b>Run all tests:</b> npx playwright test
 
 <b>View the HTML report (after test run):</b> npx playwright show-report

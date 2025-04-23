@@ -1,9 +1,9 @@
-import { expect, Locator } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class AlertFragment {
   alert: Locator;
 
-  constructor(readonly page) {
+  constructor(readonly page: Page) {
     this.alert = this.page.getByRole("alert", {
       name: "Product added to shopping cart",
     });
