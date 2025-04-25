@@ -4,7 +4,7 @@ export class HeaderFragment {
   navCart: Locator;
 
   constructor(readonly page: Page) {
-    this.navCart = this.page.locator('[data-test="nav-cart"]');
+    this.navCart = this.page.getByTestId("nav-cart");
   }
 
   async goToCart(): Promise<void> {

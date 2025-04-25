@@ -5,6 +5,7 @@ import { ProductPage } from "./pages/productPage";
 import { ProductsFilterFragment } from "./pages/productsFiltersFragment";
 import { HeaderFragment } from "./pages/headerFragments";
 import { AlertFragment } from "./pages/alertFragment";
+import { CheckoutPage } from "./pages/checkoutPage";
 import { config } from "./env.config";
 
 type MyFixtures = {
@@ -14,6 +15,7 @@ type MyFixtures = {
   productsFilterFragment: ProductsFilterFragment;
   headerFragment: HeaderFragment;
   alertFragment: AlertFragment;
+  checkoutPage: CheckoutPage;
   loggedInPage: Page;
 };
 
@@ -47,5 +49,9 @@ export const test = base.extend<MyFixtures>({
 
   alertFragment: async ({ page }, use) => {
     await use(new AlertFragment(page));
+  },
+
+  checkoutPage: async ({ page }, use) => {
+    await use(new CheckoutPage(page));
   },
 });

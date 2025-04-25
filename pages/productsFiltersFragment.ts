@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { PowerTools } from "../utils/enums";
-
 export class ProductsFilterFragment {
   page: Page;
   sortDropDown: Locator;
@@ -8,7 +7,7 @@ export class ProductsFilterFragment {
 
   constructor(page: Page) {
     this.page = page;
-    this.sortDropDown = this.page.locator('[data-test="sort"]');
+    this.sortDropDown = this.page.getByTestId("sort");
     this.sanderCheckbox = this.page.getByLabel(PowerTools.SANDER, {
       exact: false,
     });

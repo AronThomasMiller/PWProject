@@ -1,7 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { HeaderFragment } from "./headerFragments";
 import { AlertFragment } from "./alertFragment";
-
 export class ProductPage {
   page: Page;
   addToCartButton: Locator;
@@ -13,12 +12,14 @@ export class ProductPage {
   proceed: Locator;
   header: HeaderFragment;
   alertFragment: AlertFragment;
+  totalPrice: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.addToCartButton = this.page.locator('[data-test="add-to-cart"]');
+    this.addToCartButton = this.page.getByTestId("add-to-cart");
     this.productName = this.page.getByTestId("product-name");
     this.unitPrice = this.page.getByTestId("unit-price");
+    this.totalPrice = this.page.getByTestId("cart-total");
     this.addToFavoritesButton = this.page.getByTestId("add-to-favorites");
     this.cartQuantity = this.page.getByTestId("cart-quantity");
     this.productTitle = this.page.getByTestId("product-title");

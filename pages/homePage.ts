@@ -1,6 +1,5 @@
 import { Locator, Page } from "@playwright/test";
 import { ProductsFilterFragment } from "./productsFiltersFragment";
-
 export class HomePage {
   page: Page;
   productsFilterFragment: ProductsFilterFragment;
@@ -18,7 +17,7 @@ export class HomePage {
 
   async clickOnProductCard(number: number): Promise<void> {
     const card = this.card.nth(number);
-    while (!( this.page.url()).includes("product")) {
+    while (!this.page.url().includes("product")) {
       await card.click();
     }
   }
