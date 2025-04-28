@@ -4,7 +4,7 @@ import { expect } from "@playwright/test";
 test("User can purchase first product successfully", async ({
   homePage,
   productPage,
-  loggedInPage,
+  loggedApp: loggedInPage,
   loginPage,
   checkoutPage,
 }) => {

@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { expect, Locator, Page } from "@playwright/test";
-import { format } from "date-fns";
+import { getCardExpirationDate } from "../utils/getCardExpirationDate";
+import { billingAddressData, paymentData, paymentMethod } from "../utils/testData";
 
 export class CheckoutPage {
   billingStreet: Locator;
@@ -54,24 +55,24 @@ export class CheckoutPage {
   }
 
   async fillBillingAddress() {
-    await this.billingStreet.fill("Main St, 123");
-    await this.billingCity.fill("Kyiv");
-    await this.billingState.fill("UA");
-    await this.billingCountry.fill("UA");
-    await this.billingPostCode.fill("01001");
+    await this.billingStreet.fill(billingAddressData.street);
+    await this.billingCity.fill(billingAddressData.city);
+    await this.billingState.fill(billingAddressData.state);
+    await this.billingCountry.fill(billingAddressData.country);
+    await this.billingPostCode.fill(billingAddressData.postCode);
     await this.proceedToCheckout3.click();
   }
 
   async fillPaymentDetails() {
-    const rawDate = new Date();
-    rawDate.setMonth(rawDate.getMonth() + 3);
-    const threeMonthsLater: string = format(rawDate, "MM/yyyy");
-    await this.cardNumber.fill("1111-1111-1111-1111");
+    const threeMonthsLater: string = getCardExpirationDate();
+    await this.cardNumber.fill(paymentData.cardNumber);
     await this.expirationDate.fill(threeMonthsLater);
-    await this.cvv.fill("111");
-    await this.cardHolder.fill("Test User");
+    await this.cvv.fill(paymentData.cvv);
+    await this.cardHolder.fill(paymentData.cardHolder);
     await this.confirmButton.click();
   }
+
+
 
   async expectProductTitleToContainText(name: string): Promise<void> {
     await expect(this.productTitle).toContainText(name);
@@ -95,7 +96,7 @@ export class CheckoutPage {
   }
 
   async choosePaymentMethod(): Promise<void> {
-    await this.paymentMethod.selectOption("Credit Card");
+    await this.paymentMethod.selectOption(paymentMethod.paymentType1);
   }
 
   async confirmPayment(): Promise<void> {

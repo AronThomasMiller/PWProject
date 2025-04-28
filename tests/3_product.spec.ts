@@ -16,7 +16,6 @@ test("Verify user can add product to cart", async ({
   
   await productPage.alertFragment.expectAlertToContainText();
   await productPage.alertFragment.expectAlertDisappearAfter8Sec();
-  await productPage.alertFragment.expectAlertIsHidden();
 
   await productPage.header.goToCart();
   await expect(homePage.page).toHaveURL("/checkout");

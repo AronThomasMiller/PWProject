@@ -16,11 +16,11 @@ type MyFixtures = {
   headerFragment: HeaderFragment;
   alertFragment: AlertFragment;
   checkoutPage: CheckoutPage;
-  loggedInPage: Page;
+  loggedApp: Page;
 };
 
 export const test = base.extend<MyFixtures>({
-  loggedInPage: async ({ page }, use) => {
+  loggedApp: async ({ page }, use) => {
     await page.goto(`${config.weburl}/auth/login`);
     const loginPage = new LoginPage(page);
     await loginPage.login("customer@practicesoftwaretesting.com", "welcome01");
@@ -37,10 +37,6 @@ export const test = base.extend<MyFixtures>({
 
   productPage: async ({ page }, use) => {
     await use(new ProductPage(page));
-  },
-
-  productsFilterFragment: async ({ page }, use) => {
-    await use(new ProductsFilterFragment(page));
   },
 
   headerFragment: async ({ page }, use) => {
