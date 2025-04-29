@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { expect, Locator, Page } from "@playwright/test";
 import { getCardExpirationDate } from "../utils/getCardExpirationDate";
-import { billingAddressData, paymentData, paymentMethod } from "../utils/testData";
+import { BillingAddress, PaymentData, PaymentMethod } from "../utils/types";
 
 export class CheckoutPage {
   billingStreet: Locator;
@@ -54,7 +54,7 @@ export class CheckoutPage {
     });
   }
 
-  async fillBillingAddress() {
+  async fillBillingAddress(billingAddressData: BillingAddress) {
     await this.billingStreet.fill(billingAddressData.street);
     await this.billingCity.fill(billingAddressData.city);
     await this.billingState.fill(billingAddressData.state);
@@ -63,16 +63,14 @@ export class CheckoutPage {
     await this.proceedToCheckout3.click();
   }
 
-  async fillPaymentDetails() {
+  async fillPaymentDetails(fillPaymentDetails: PaymentData) {
     const threeMonthsLater: string = getCardExpirationDate();
-    await this.cardNumber.fill(paymentData.cardNumber);
+    await this.cardNumber.fill(fillPaymentDetails.cardNumber);
     await this.expirationDate.fill(threeMonthsLater);
-    await this.cvv.fill(paymentData.cvv);
-    await this.cardHolder.fill(paymentData.cardHolder);
+    await this.cvv.fill(fillPaymentDetails.cvv);
+    await this.cardHolder.fill(fillPaymentDetails.cardHolder);
     await this.confirmButton.click();
   }
-
-
 
   async expectProductTitleToContainText(name: string): Promise<void> {
     await expect(this.productTitle).toContainText(name);
@@ -95,7 +93,7 @@ export class CheckoutPage {
     await this.proceedToCheckout2.click();
   }
 
-  async choosePaymentMethod(): Promise<void> {
+  async choosePaymentMethod(paymentMethod: PaymentMethod): Promise<void> {
     await this.paymentMethod.selectOption(paymentMethod.paymentType1);
   }
 

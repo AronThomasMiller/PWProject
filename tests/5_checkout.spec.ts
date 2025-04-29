@@ -1,5 +1,10 @@
 import { test } from "../fixtures";
 import { expect } from "@playwright/test";
+import {
+  billingAddressData,
+  paymentData,
+  paymentMethod,
+} from "../utils/testData";
 
 test("User can purchase first product successfully", async ({
   homePage,
@@ -27,9 +32,9 @@ test("User can purchase first product successfully", async ({
   await checkoutPage.expectPageToContainCorrectTotalPrice(unitPrice ?? "");
   await checkoutPage.clickOnProceedToCheckoutButton();
   await checkoutPage.expectUserIsLoggedIn();
-  await checkoutPage.fillBillingAddress();
-  await checkoutPage.choosePaymentMethod();
-  await checkoutPage.fillPaymentDetails();
+  await checkoutPage.fillBillingAddress(billingAddressData);
+  await checkoutPage.choosePaymentMethod(paymentMethod);
+  await checkoutPage.fillPaymentDetails(paymentData);
   await checkoutPage.confirmPayment();
   await expect(checkoutPage.paymentSuccessMessage).toBeVisible();
   await checkoutPage.confirmPayment();
