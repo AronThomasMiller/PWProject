@@ -39,18 +39,31 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: "auth",
+      testMatch: ["**/authLogin.spec.ts"],
+    },
+    {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "pw/.auth/user.json",
+      },
     },
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      use: {
+        ...devices["Desktop Firefox"],
+        storageState: "pw/.auth/user.json",
+      },
     },
 
     {
       name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      use: {
+        ...devices["Desktop Safari"],
+        storageState: "pw/.auth/user.json",
+      },
     },
 
     /* Test against mobile viewports. */

@@ -32,4 +32,8 @@ export class LoginPage {
   async expectNavMenuToContainText(text: string): Promise<void> {
     await expect(this.navMenu).toContainText(text);
   }
+
+  async storeState (authFile: string): Promise<void>{
+    await this.page.context().storageState({path: authFile});
+  }
 }
