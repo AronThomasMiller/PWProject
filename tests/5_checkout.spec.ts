@@ -9,13 +9,8 @@ import {
 test("User can purchase first product successfully", async ({
   homePage,
   productPage,
-  loggedApp: loggedInPage,
-  loginPage,
   checkoutPage,
 }) => {
-  await expect(loggedInPage).toHaveURL("/account");
-  await loginPage.expectPageTitleToContainText("My account");
-
   await homePage.navigate();
   await homePage.clickOnProductCard(0);
   expect(homePage.page.url()).toContain("/product");

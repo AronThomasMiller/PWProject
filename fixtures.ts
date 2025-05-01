@@ -6,7 +6,8 @@ import { ProductsFilterFragment } from "./pages/productsFiltersFragment";
 import { HeaderFragment } from "./pages/headerFragments";
 import { AlertFragment } from "./pages/alertFragment";
 import { CheckoutPage } from "./pages/checkoutPage";
-import { config } from "./env.config";
+
+const authFile = "pw/.auth/user.json";
 
 type MyFixtures = {
   loginPage: LoginPage;
@@ -20,11 +21,11 @@ type MyFixtures = {
 };
 
 export const test = base.extend<MyFixtures>({
-  loggedApp: async ({ page }, use) => {
-    await page.goto(`${config.weburl}/auth/login`);
-    const loginPage = new LoginPage(page);
-    await loginPage.login("customer@practicesoftwaretesting.com", "welcome01");
+  loggedApp: async ({ browser }, use) => {
+    const context = await browser.newContext({ storageState: authFile });
+    const page = await context.newPage();
     await use(page);
+    await context.close();
   },
 
   loginPage: async ({ page }, use) => {
