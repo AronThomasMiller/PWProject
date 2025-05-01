@@ -1,13 +1,9 @@
-import { expect, test } from "@playwright/test";
-import { LoginPage } from "../pages/loginPage";
+import { test } from "../fixtures";
+import { expect } from "@playwright/test";
 import { config } from "../env.config";
 
-test("Verify login with valid credentials", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-
-  await page.goto(`${config.weburl}/auth/login`);
-  await loginPage.login(`${config.useremail}`, `${config.userpassword}`);
-  await expect(page).toHaveURL("/account");
+test("Verify login with valid credentials", async ({ loggedApp: loggedInPage, loginPage }) => {
+  await expect(loggedInPage).toHaveURL('/account');
   await loginPage.expectPageTitleToContainText("My account");
   await loginPage.expectNavMenuToContainText(`${config.username}`);
 });

@@ -1,16 +1,11 @@
-import { expect, test } from "@playwright/test";
-import { HomePage } from "../pages/homePage";
-import { ProductPage } from "../pages/productPage";
+import { test } from "../fixtures";
+import { expect } from "@playwright/test";
 
-test("Verify user can view product details", async ({ page }) => {
-  const homePage = new HomePage(page);
-
+test("Verify user can view product details", async ({ homePage, productPage }) => {
   await homePage.navigate();
   await homePage.clickOnProductCard(0);
 
-  const productPage = new ProductPage(page);
-
-  expect(page.url()).toContain("/product");
+  expect(homePage.page.url()).toContain("/product");
   await productPage.expectProductNameToContainText("Combination Pliers");
   await productPage.expectUnitPriceToContainText("14.15");
   await productPage.expectAddToCartToBeVisible();

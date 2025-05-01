@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { HeaderFragment } from "./headerFragments";
-
 export class LoginPage {
   page: Page;
   emailLocator: Locator;
@@ -12,9 +11,9 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.emailLocator = this.page.locator('[data-test="email"]');
-    this.password = this.page.locator('[data-test="password"]');
-    this.submitButton = this.page.locator('[data-test="login-submit"]');
+    this.emailLocator = this.page.getByTestId("email");
+    this.password = this.page.getByTestId("password");
+    this.submitButton = this.page.getByTestId("login-submit");
     this.header = new HeaderFragment(page);
     this.pageTitle = this.page.getByTestId("page-title");
     this.navMenu = this.page.getByTestId("nav-menu");
@@ -33,5 +32,4 @@ export class LoginPage {
   async expectNavMenuToContainText(text: string): Promise<void> {
     await expect(this.navMenu).toContainText(text);
   }
-
 }

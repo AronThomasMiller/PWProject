@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-     "lint": "eslint ."
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@playwright/test": "^1.51.1",
+    "@types/date-fns": "^2.5.3",
     "@types/node": "^22.14.0",
     "eslint": "^9.25.0",
     "eslint-plugin-playwright": "^2.2.0",
