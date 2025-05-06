@@ -7,3 +7,4 @@ node_modules/
 /playwright/.cache/
 .env
 pw/.auth/user.json
+report.json
