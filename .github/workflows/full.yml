@@ -1,14 +1,15 @@
 name: Playwright Tests (Full)
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main, master]
-  pull_request:
+  workflow_run:
+    workflows: ["Auth Tests"]
+    types:
+      - completed
     branches: [main, master]
 
 jobs:
   test:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     timeout-minutes: 90
     env:
       WEB_URL: ${{ secrets.WEB_URL }}
@@ -26,16 +27,21 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      
-      - name: Run auth tests
-        run: npx playwright test --project=auth
-      
+        
+
+      - name: Download auth state
+        uses: actions/download-artifact@v4
+        with:
+          name: auth-state
+          path: pw/.auth
+          run_id: ${{ github.event.workflow_run.id }}
+
       - name: Run smoke tests
         run: npx playwright test --project=smoke
-      
+
       - name: Run regression tests
         run: npx playwright test --project=regression
-      
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
