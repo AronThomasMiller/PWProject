@@ -1,0 +1,35 @@
+name: Smoke Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  smoke:
+    timeout-minutes: 30
+    env:
+      WEB_URL: ${{ secrets.WEB_URL }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      USER_NAME: ${{ secrets.USER_NAME }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright smoke tests
+        run: npx playwright test --project=smoke
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-smoke-report
+          path: playwright-report/
+          retention-days: 30

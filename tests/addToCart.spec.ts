@@ -1,7 +1,7 @@
 import { test } from "../fixtures";
 import { expect } from "@playwright/test";
 
-test("Verify user can view product details", async ({ homePage, productPage }) => {
+test("Verify user can view product details", { tag: "@smoke" }, async ({ homePage, productPage }) => {
   await test.step("Navigate to home page", async () => {
     await homePage.navigate();
   });

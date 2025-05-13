@@ -21,6 +21,7 @@ export class LoginPage {
   }
 
   async login(email: string, password: string): Promise<void> {
+    await this.emailLocator.waitFor({ state: "visible" });
     await this.emailLocator.fill(email);
     await this.password.fill(password);
     await this.submitButton.click();

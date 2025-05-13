@@ -50,6 +50,27 @@ export default defineConfig({
     },
     {
       name: "chromium",
+      dependencies: ["auth"],
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "pw/.auth/user.json",
+      },
+    },
+    {
+      name: "smoke",
+      grep: /@smoke/,
+      testIgnore: /@regression/,
+      dependencies: ["auth"],
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "pw/.auth/user.json",
+      },
+    },
+    {
+      name: "regression",
+      grep: /@regression/,
+      testIgnore: /@smoke/,
+      dependencies: ["auth"],
       use: {
         ...devices["Desktop Chrome"],
         storageState: "pw/.auth/user.json",
