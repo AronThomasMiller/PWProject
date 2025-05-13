@@ -1,15 +1,13 @@
 name: Smoke Tests
 
 on:
-  workflow_run:
-    workflows: ["Auth Tests"]
-    types:
-      - completed
+  push:
+    branches: [main, master]
+  pull_request:
     branches: [main, master]
 
 jobs:
   smoke:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     timeout-minutes: 30
     env:
       WEB_URL: ${{ secrets.WEB_URL }}
@@ -25,14 +23,27 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+        
+      - name: Run authentication tests
+        run: npx playwright test --project=auth
+
+      - name: Upload auth state
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: auth-state
+          path: pw/.auth/user.json
+          retention-days: 1
+          
       - name: Download auth state
         uses: actions/download-artifact@v4
         with:
           name: auth-state
           path: pw/.auth
-          run_id: ${{ github.event.workflow_run.id }}
+          
       - name: Run Playwright smoke tests
         run: npx playwright test --project=smoke
       - uses: actions/upload-artifact@v4
