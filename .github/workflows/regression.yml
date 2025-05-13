@@ -1,0 +1,43 @@
+name: Regression Tests
+
+on:
+  workflow_run:
+    workflows: ["Auth Tests"]
+    types:
+      - completed
+    branches: [main, master]
+
+jobs:
+  regression:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    timeout-minutes: 60
+    env:
+      WEB_URL: ${{ secrets.WEB_URL }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      USER_NAME: ${{ secrets.USER_NAME }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Download auth state
+        uses: actions/download-artifact@v4
+        with:
+          name: auth-state
+          path: pw/.auth
+          run_id: ${{ github.event.workflow_run.id }}
+      - name: Run Playwright regression tests
+        run: npx playwright test --project=regression
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-regression-report
+          path: playwright-report/
+          retention-days: 30
