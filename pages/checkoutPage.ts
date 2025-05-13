@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { expect, Locator, Page } from "@playwright/test";
 import { getCardExpirationDate } from "../utils/getCardExpirationDate";
 import { BillingAddress, PaymentData, PaymentMethod } from "../utils/types";

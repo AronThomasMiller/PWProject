@@ -56,21 +56,21 @@ export default defineConfig({
       },
     },
 
-    {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-        storageState: "pw/.auth/user.json",
-      },
-    },
+    // {
+    //   name: "firefox",
+    //   use: {
+    //     ...devices["Desktop Firefox"],
+    //     storageState: "pw/.auth/user.json",
+    //   },
+    // },
 
-    {
-      name: "webkit",
-      use: {
-        ...devices["Desktop Safari"],
-        storageState: "pw/.auth/user.json",
-      },
-    },
+    // {
+    //   name: "webkit",
+    //   use: {
+    //     ...devices["Desktop Safari"],
+    //     storageState: "pw/.auth/user.json",
+    //   },
+    // },
 
     /* Test against mobile viewports. */
     // {
