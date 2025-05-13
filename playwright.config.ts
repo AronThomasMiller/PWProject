@@ -67,6 +67,7 @@ export default defineConfig({
       dependencies: ["auth"],
       use: {
         ...devices["Desktop Chrome"],
+         userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/119.0.0.0 Safari/537.36",
         storageState: "pw/.auth/user.json",
       },
     },
@@ -77,6 +78,7 @@ export default defineConfig({
       dependencies: ["auth"],
       use: {
         ...devices["Desktop Chrome"],
+         userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/119.0.0.0 Safari/537.36",
         storageState: "pw/.auth/user.json",
       },
     },
