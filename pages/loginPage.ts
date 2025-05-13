@@ -34,7 +34,6 @@ export class LoginPage {
     //temp
     console.log("URL:")
     console.log(this.page.url());
-     expect (this.page.url()).toBeDefined();
   }
 
   async expectPageTitleToContainText(text: string): Promise<void> {
