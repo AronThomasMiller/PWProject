@@ -1,7 +1,10 @@
 import { test } from "../fixtures";
 import { expect } from "@playwright/test";
 
-test("Verify user can add product to cart", async ({ homePage, productPage }) => {
+test("Verify user can add product to cart", async ({
+  homePage,
+  productPage,
+}) => {
   await test.step("Navigate to home page and open 5th product", async () => {
     await homePage.navigate();
     await homePage.clickOnProductCard(4);
@@ -9,7 +12,9 @@ test("Verify user can add product to cart", async ({ homePage, productPage }) =>
   });
 
   await test.step("Verify product name and price", async () => {
-    await productPage.expectPageToContainCorrectProductName("Slip Joint Pliers");
+    await productPage.expectPageToContainCorrectProductName(
+      "Slip Joint Pliers"
+    );
     await productPage.expectPageToContainCorrectUnitPrice("9.17");
   });
 

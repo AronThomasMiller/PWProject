@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { HeaderFragment } from "./headerFragments";
+import { config } from "../env.config";
 export class LoginPage {
   page: Page;
   emailLocator: Locator;
@@ -25,6 +26,10 @@ export class LoginPage {
     await this.submitButton.click();
   }
 
+  async goToLogin(): Promise<void> {
+    await this.page.goto(`${config.weburl}/auth/login`);
+  }
+
   async expectPageTitleToContainText(text: string): Promise<void> {
     await expect(this.pageTitle).toContainText(text);
   }
@@ -33,7 +38,7 @@ export class LoginPage {
     await expect(this.navMenu).toContainText(text);
   }
 
-  async storeState (authFile: string): Promise<void>{
-    await this.page.context().storageState({path: authFile});
+  async storeState(authFile: string): Promise<void> {
+    await this.page.context().storageState({ path: authFile });
   }
 }

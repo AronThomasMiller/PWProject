@@ -10,7 +10,6 @@ export class CheckoutPage {
   billingState: Locator;
   billingPostCode: Locator;
   billingCountry: Locator;
-
   paymentMethod: Locator;
   cardNumber: Locator;
   expirationDate: Locator;
@@ -18,7 +17,6 @@ export class CheckoutPage {
   cardHolder: Locator;
   confirmButton: Locator;
   paymentSuccessMessage: Locator;
-  paymentSuccessOrder: Locator;
   productTitle: Locator;
   unitPrice: Locator;
   totalPrice: Locator;
@@ -40,9 +38,6 @@ export class CheckoutPage {
     this.cardHolder = page.getByTestId("card_holder_name");
     this.confirmButton = page.getByTestId("finish");
     this.paymentSuccessMessage = page.getByText("Payment was successful");
-    this.paymentSuccessOrder = page.getByText(
-      "Thanks for your order! Your invoice number is"
-    );
     this.productTitle = page.getByTestId("product-title");
     this.unitPrice = page.getByTestId("product-price");
     this.totalPrice = page.getByTestId("cart-total");

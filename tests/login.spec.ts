@@ -4,11 +4,11 @@ import { config } from "../env.config";
 
 test("Verify login with valid credentials", async ({ page, loginPage }) => {
   await test.step("Navigate to login page", async () => {
-    await page.goto(`${config.weburl}/auth/login`);
+    await loginPage.goToLogin();
   });
 
   await test.step("Login with valid credentials", async () => {
-    await loginPage.login("customer@practicesoftwaretesting.com", "welcome01");
+    await loginPage.login(config.useremail, config.userpassword);
   });
 
   await test.step("Verify successful login", async () => {

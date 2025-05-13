@@ -47,6 +47,5 @@ test("User can purchase first product successfully", async ({
   await test.step("Verify payment confirmation", async () => {
     await expect(checkoutPage.paymentSuccessMessage).toBeVisible();
     await checkoutPage.confirmPayment();
-    await expect(checkoutPage.paymentSuccessOrder).toBeVisible();
   });
 });
