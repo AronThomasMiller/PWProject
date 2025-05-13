@@ -7,7 +7,10 @@ test(
   { tag: "@smoke" },
   async ({ page, loginPage }) => {
     await test.step("Navigate to login page", async () => {
-      await loginPage.goToLogin();
+      await page.goto(`https://practicesoftwaretesting.com/auth/login`);
+    console.log(page.url());
+
+    //await loginPage.goToLogin();
     });
 
     await test.step("Login with valid credentials", async () => {
