@@ -25,6 +25,11 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - name: Debug environment
+        run: |
+          echo "WEB_URL is set: ${{ env.WEB_URL != '' }}"
+          echo "USER_EMAIL is set: ${{ env.USER_EMAIL != '' }}"
+          echo "USER_PASSWORD is set: ${{ env.USER_PASSWORD != '' }}"
       - name: Run authentication tests
         run: npx playwright test --project=auth
       - name: Upload auth state
