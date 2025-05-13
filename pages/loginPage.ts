@@ -30,6 +30,8 @@ export class LoginPage {
   async goToLogin(): Promise<void> {
     await this.page.goto(`${config.weburl}/auth/login`);
     //temp
+    console.log("URL:")
+    console.log(this.page.url());
      expect (this.page.url()).toBeDefined();
   }
 
