@@ -29,6 +29,8 @@ export class LoginPage {
 
   async goToLogin(): Promise<void> {
     await this.page.goto(`${config.weburl}/auth/login`);
+    //temp
+     expect (this.page.url()).toBeDefined();
   }
 
   async expectPageTitleToContainText(text: string): Promise<void> {
