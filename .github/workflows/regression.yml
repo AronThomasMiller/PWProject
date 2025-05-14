@@ -29,20 +29,6 @@ jobs:
         
       - name: Run authentication tests
         run: npx playwright test --project=auth
-
-      - name: Upload auth state
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: auth-state
-          path: pw/.auth/user.json
-          retention-days: 1
-          
-      - name: Download auth state
-        uses: actions/download-artifact@v4
-        with:
-          name: auth-state
-          path: pw/.auth
           
       - name: Run Playwright regression tests
         run: npx playwright test --project=regression
